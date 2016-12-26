@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('crack', '> 0.1.8')
   s.add_dependency('htmlentities', '~> 4.3')
-  s.add_development_dependency('shoulda')
 
   s.extra_rdoc_files = ['README.md']
   s.rdoc_options     = ["--charset=UTF-8"]
