@@ -3,6 +3,7 @@
 .bundle
 .config
 coverage
+Gemfile.lock
 Rakefile
 InstalledFiles
 lib/bundler/man
