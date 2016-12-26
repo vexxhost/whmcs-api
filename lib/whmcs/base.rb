@@ -1,6 +1,7 @@
 require 'net/http'
 require 'net/https'
 require 'crack'
+require 'htmlentities'
 
 module WHMCS
   # WHMCS::Base is the main class used to subclass WHMCS API resources
@@ -45,12 +46,16 @@ module WHMCS
     def self.parse_response(raw)
       result = {}
       return result if raw.to_s.empty?
-      
+
       if raw.match(/xml version/)
         Crack::XML.parse(raw)
       else
+        # Decode HTML entities (in case of symbols)
+        coder = HTMLEntities.new
+        data = coder.decode(raw)
+
         # in case of password encrypt/decrypt - '=' should be properly parsed
-        raw.split(';').map do |line|
+        data.split(';').map do |line|
           m = /^(\w+)\=(.*)$/.match(line)
           result[ m[1] ] = m[2]
         end
