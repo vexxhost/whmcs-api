@@ -52,7 +52,7 @@ module WHMCS
       else
         # Decode HTML entities (in case of symbols)
         coder = HTMLEntities.new
-        data = coder.decode(raw)
+        data = coder.decode(raw.force_encoding('UTF-8'))
 
         # in case of password encrypt/decrypt - '=' should be properly parsed
         data.split(';').map do |line|
